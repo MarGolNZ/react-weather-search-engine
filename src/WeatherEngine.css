@@ -1,3 +1,9 @@
 .WeatherEngine {
-  background: #ebfaed;
+  background: #eeedcb;
+  border-radius: 5px;
+  padding: 20px;
+}
+.WeatherEngine h2 {
+  margin-bottom: 50px;
+  text-align: center;
 }

@@ -10,10 +10,13 @@ function App() {
       <div className="container">
 
            <WeatherEngine />
+
+        <footer><small>This React Weather Engine has been created by Marina Golovina and is <a href="https://github.com/MarGolNZ/react-weather-search-engine" target="_blank">open-sourced</a></small> 
         
+       </footer>  
       </div>
 
-         
+       
 
       
 

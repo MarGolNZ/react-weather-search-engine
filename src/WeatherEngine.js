@@ -1,21 +1,61 @@
 import "./WeatherEngine.css";
 import React, { useState } from "react";
+import axios from 'axios';
 
-export default function WeatherEngine() {
+export default function WeatherEngine(props) {
+const [city, setCity] = useState("");
+const [temp, setTemp] = useState(null);
+const [description, setDescription] = useState(null)
+const [humidity, setHumidity] = useState(null)
+const [wind, setWind] = useState(null)
 
-    return(
+    function handleResponse(response) {
+        console.log(response.data);
+        setCity(response.data.name);
+        setTemp(Math.round(response.data.main.temp));
+        setDescription(response.data.weather[0].description);
+        setHumidity(response.data.main.humidity);
+        setWind(Math.round(response.data.wind.speed))
+
+    }
+
+    function search() {
+
+       let apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8ea9a418f9dd13e967a728a357801a35&units=metric`
+       axios.get(apiUrl).then(handleResponse)  
+    }
+    
+    
+    function handleChange(event) {
+        event.preventDefault()
+        console.log(event.target.value)
+        setCity(event.target.value)
+
+    }
+         
+    function handleSubmit(event) {
+    event.preventDefault()
+    search()
+
+    }
+    return (
 
         <div className = "WeatherEngine">
+            
 
             <h2>React Weather Engine</h2>
-
-
-
-            <form>
+            
+ 
+            <form  onSubmit={handleSubmit}>
                 <div class="form-group" >
                     <div className='row'>
                         <div className='col-9'>
-                          <input type="text" class="form-control" placeholder="Enter a city name"/>    
+                          <input
+                          type="search"
+                          className="form-control"
+                          placeholder="Enter a city name"
+                          onChange={handleChange}
+                          />    
                         </div>
                         <div className='col-3'>
                             <button className="btn btn-primary" type="submit">Search</button>
@@ -27,34 +67,32 @@ export default function WeatherEngine() {
             <div className='row cityName'>
                 <div className='col-12'>
                     <h3>
-                        Brisbane
+                        {city}
                     </h3>
                 </div>   
-                <div className='col-12'>
-                    <p>
-                        <strong>Saturday, 05:00pm</strong>
-                    </p>
-                </div>
             </div>
+
+
+            
 
             <div className='row'>
                 <div className='col-2'>
                 <img src="//ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="mostly cloudly"></img>    
                 </div>  
                 <div className='col'>
-                    22 °C | °F
+                    {temp} °C | °F
                 </div>
-                <div className='col-6'>
+                <div className='col-7'>
                     <ul>
                         <li>
-                            Precipitation: 2%
+                            Description: {description}
                         </li>
                          <li>
-                            Humidity: 72%
+                            Humidity: {humidity}%
                         </li>
 
                          <li>
-                            Wind: 8 km/h
+                            Wind: {wind} km/h
                         </li>
                     </ul>
                 </div>
@@ -66,6 +104,8 @@ export default function WeatherEngine() {
 
             
         </div> 
-        
-    ) 
+       
+    
+       
+    )  
 }

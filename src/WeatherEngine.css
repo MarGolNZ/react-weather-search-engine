@@ -7,3 +7,9 @@
   margin-bottom: 50px;
   text-align: center;
 }
+.WeatherEngine ul {
+  list-style-type: none;
+}
+.cityName {
+  padding: 20px;
+}

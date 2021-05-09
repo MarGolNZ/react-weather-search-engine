@@ -96,7 +96,7 @@ const [icon, setIcon] = useState()
 
             <div className='row'>
                 <div className='col'>
-                   <img src={icon}></img> 
+                   <img src={icon} alt="weather icon" ></img> 
                 </div>  
                 <div className='col'>
                     {temp} 

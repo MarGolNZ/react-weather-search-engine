@@ -20,13 +20,13 @@ const [icon, setIcon] = useState()
         setDescription(response.data.weather[0].description);
         setHumidity(response.data.main.humidity);
         setWind(Math.round(response.data.wind.speed)); 
-        setIcon(`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
+        setIcon(`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
 
     }
 
     function search() {
 
-       let apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8ea9a418f9dd13e967a728a357801a35&units=metric`
+       let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8ea9a418f9dd13e967a728a357801a35&units=metric`
        axios.get(apiUrl).then(handleResponse)  
     }
     

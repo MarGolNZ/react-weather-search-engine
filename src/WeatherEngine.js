@@ -9,13 +9,17 @@ const [description, setDescription] = useState(null)
 const [humidity, setHumidity] = useState(null)
 const [wind, setWind] = useState(null)
 
+
+
+
     function handleResponse(response) {
         console.log(response.data);
         setCity(response.data.name);
         setTemp(Math.round(response.data.main.temp));
         setDescription(response.data.weather[0].description);
         setHumidity(response.data.main.humidity);
-        setWind(Math.round(response.data.wind.speed))
+        setWind(Math.round(response.data.wind.speed)); 
+        
 
     }
 
@@ -34,10 +38,24 @@ const [wind, setWind] = useState(null)
     }
          
     function handleSubmit(event) {
-    event.preventDefault()
-    search()
-
+       event.preventDefault() 
+       search()
     }
+
+    function showFahrenheit(event) {
+        event.preventDefault();
+        
+        setTemp(Math.round((temp * 9/5) + 32))  
+    }      
+
+    function showCelsius(event) {
+        event.preventDefault();
+        
+        setTemp(Math.round((temp - 32) * 5/9))
+       
+    }
+
+    
     return (
 
         <div className = "WeatherEngine">
@@ -76,13 +94,29 @@ const [wind, setWind] = useState(null)
             
 
             <div className='row'>
-                <div className='col-2'>
+                <div className='col'>
                 <img src="//ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="mostly cloudly"></img>    
                 </div>  
                 <div className='col'>
-                    {temp} °C | °F
+                    {temp} 
                 </div>
-                <div className='col-7'>
+                <div className='col'>
+                    <span className="celsius">
+                        <a href="/" onClick={showCelsius}>
+                            °C
+                        </a>
+                    </span>    
+                     |
+                    <span>
+                        <a href="/" onClick={showFahrenheit}>
+                            °F
+                        </a> 
+                    </span> 
+                    
+                    
+                </div>
+
+                <div className='col-6'>
                     <ul>
                         <li>
                             Description: {description}

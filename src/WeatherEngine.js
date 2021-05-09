@@ -8,6 +8,7 @@ const [temp, setTemp] = useState(null);
 const [description, setDescription] = useState(null)
 const [humidity, setHumidity] = useState(null)
 const [wind, setWind] = useState(null)
+const [icon, setIcon] = useState()
 
 
 
@@ -19,7 +20,7 @@ const [wind, setWind] = useState(null)
         setDescription(response.data.weather[0].description);
         setHumidity(response.data.main.humidity);
         setWind(Math.round(response.data.wind.speed)); 
-        
+        setIcon(`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
 
     }
 
@@ -95,7 +96,7 @@ const [wind, setWind] = useState(null)
 
             <div className='row'>
                 <div className='col'>
-                <img src="//ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="mostly cloudly"></img>    
+                   <img src={icon}></img> 
                 </div>  
                 <div className='col'>
                     {temp} 
